@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+hello vm
+
+$!{value1}
+    $!{name.name}
+
+#set($title="nowcorder")
+    include #include("header.vm")<br>
+    parse #parse("header.vm")
+
+
+ #foreach($color in $colors){
+     color $foreach.count:$color
+ #end
+
+    #foreach($key in $map.keySet())
+        key $key,$foreach.index:$map.get($key)
+    #end
+
+    #foreach($kv in $map.entrySet())
+        key $kv.key(),$foreach.index:$kv.value
+    #end
+
+#macro(select_color $index,$color)
+    color by macro $index,$color
+#end
+
+    #foreach($color in $colors){
+     #select_color($foreach.index,$color)
+    #end
+
+    ##单引号和双引号的区别
+    #set($hello="hello")
+    #set($hello1="$!{hello} world")
+    #set($hello2='$!{hello} world')
+    $hello1
+    $hello2
+    $!{colors.size()}
+</pre>
+</body>
+</html>
